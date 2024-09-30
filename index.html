@@ -8,6 +8,8 @@
 <style>
   body {
   font-family: Helvetia, arial, sans-serif;
+    font-size: 1.15em;
+    margin: 15px 0 0 15px;
 }
 form {
   margin-bottom: 20px;
@@ -20,6 +22,9 @@ input {
   height: 30px;
   width: 100%;
   max-width: 450px;
+  font-size: .95em;
+  padding: 4px;
+
 }
 #resultwrap {
   background: #dcdcdc;
@@ -32,12 +37,15 @@ display: none;
   padding:8px;
   border: 1px dashed #333;
 }
+.small {
+    font-size: .85em;
+}
 #resultlabel {
   margin-bottom: 5px; display: none;
 }
 button {
   margin-bottom: 20px;
-  font-size: 1em;
+  font-size: .85em;
   padding: 4px;
 }
   </style>
@@ -85,13 +93,13 @@ var handle = document.getElementById('handle').value;
   <input type="text" id="name" name="name" placeholder="Firstname Lastname">
   <br><br>
   <label for="email">Email addresss</label>
-  <input type="text" id="email" name="email" placeholder="flastname@baltsun.com">
+  <input type="email" id="email" name="email" placeholder="flastname@baltsun.com">
   <br><br>
     <label for="phone">Phone number </label>
-  <input type="text" id="phone" name="phone" placeholder="410-332-6xxx">
+  <input type="tel" id="phone" name="phone" placeholder="410-332-6xxx">
 
 <br><br>
-  <label for="handle">X handle (leave blank if not using X)</label>
+  <label for="handle">X handle <span class="small">(leave blank if not using X)</span></label>
   <input type="text" id="handle" name="handle" placeholder="e.g. baltimoresun">
 </form>
 <button onclick="fill()">Get code for Wordpress</button>
@@ -100,8 +108,3 @@ var handle = document.getElementById('handle').value;
   <div id="result" name="result">
   </div>
 </div>
-  
-  
-   </body>
-  
-  </html>
