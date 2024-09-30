@@ -1,0 +1,107 @@
+<html>
+
+  <head>
+    <title>Tagline generator</title>
+    <meta name="robots" content="noindex">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+  font-family: Helvetia, arial, sans-serif;
+}
+form {
+  margin-bottom: 20px;
+}
+label {
+  display: block;
+}
+input {
+  margin-top: 5px;
+  height: 30px;
+  width: 100%;
+  max-width: 450px;
+}
+#resultwrap {
+  background: #dcdcdc;
+  width: 100%;
+  max-width: 450px;
+}
+#result {
+ 
+display: none;
+  padding:8px;
+  border: 1px dashed #333;
+}
+#resultlabel {
+  margin-bottom: 5px; display: none;
+}
+button {
+  margin-bottom: 20px;
+  font-size: 1em;
+  padding: 4px;
+}
+  </style>
+  
+  
+<script>
+  function fill() {
+ 
+    
+    var name = document.getElementById('name').value;
+var email = document.getElementById('email').value;
+var phone = document.getElementById('phone').value;
+var handle = document.getElementById('handle').value;
+    
+    function isEmptyOrSpaces(str){
+    return str === null || str.match(/^ *$/) !== null;
+}
+    
+    
+    var result ="";
+    
+    if (isEmptyOrSpaces(handle)) {
+    result = "<em>Have a news tip? Contact " + name + " at <a href='mailto:" + email +"'>" + email + "</a> and <a href='" + phone + "'>" + phone + "</a>.</em>"        
+} else {
+  result = "<em>Have a news tip? Contact " + name + " at <a href='mailto:" + email + "'>" + email + "</a>, <a href='" + phone + "'>" + phone + "</a> and <a href='https://x.com/" + handle + "' target='_blank'>x.com/" + handle + "</a>.</em>"
+}
+    
+    document.getElementById('result').innerHTML = result;
+    
+    document.getElementById("result").style.display = "block";
+    
+    document.getElementById("resultlabel").style.display = "block";
+
+    document.getElementById("resultlabel").scrollIntoView();
+  }
+</script>
+    
+      </head>
+
+  
+  <body>
+<form>
+
+   <label for="name">Reporter name</label>
+  <input type="text" id="name" name="name" placeholder="Firstname Lastname">
+  <br><br>
+  <label for="email">Email addresss</label>
+  <input type="text" id="email" name="email" placeholder="flastname@baltsun.com">
+  <br><br>
+    <label for="phone">Phone number </label>
+  <input type="text" id="phone" name="phone" placeholder="410-332-6xxx">
+
+<br><br>
+  <label for="handle">X handle (leave blank if not using X)</label>
+  <input type="text" id="handle" name="handle" placeholder="e.g. baltimoresun">
+</form>
+<button onclick="fill()">Get code for Wordpress</button>
+ <label for="result" id="resultlabel">Copy result below and paste into Wordpress</label>
+<div id="resultwrap">
+  <div id="result" name="result">
+  </div>
+</div>
+  
+  
+   </body>
+  
+  </html>
