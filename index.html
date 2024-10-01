@@ -11,11 +11,22 @@
     font-size: 1.15em;
     margin: 15px 0 0 15px;
 }
+a, a:hover, a:active, a:visited, #see {
+  color: rgb(28, 37, 81);
+  text-decoration: underline;
+ cursor: pointer;
+}
+
+#store {
+  display: none;
+}
 form {
   margin-bottom: 20px;
 }
 label {
   display: block;
+  font-size: .875em;
+  font-weight: bold;
 }
 input {
   margin-top: 5px;
@@ -32,26 +43,86 @@ input {
   max-width: 450px;
 }
 #result {
- 
+ line-height: 133%;
 display: none;
   padding:8px;
   border: 1px dashed #333;
 }
-.small {
-    font-size: .85em;
-}
 #resultlabel {
   margin-bottom: 5px; display: none;
 }
+#small {
+  font-size: .8em;
+  font-style: italic;
+  color: #888;
+  width: 100%;
+  max-width: 450px;
+  line-height: 150%;
+  margin-top: 7px;
+}
+#small img {
+width: 30px;
+margin: 3px;
+position: relative;
+top: -2px;
+}
+#small strong {
+  position: relative;
+  top: -15px;
+}
 button {
   margin-bottom: 20px;
-  font-size: .85em;
+  font-size: .8em;
   padding: 4px;
+  cursor: pointer;
+}
+#gif {
+  display: none;
+}
+#gif img {
+  width: 100%;
+  max-width: 320px;
+  display: block;
+  position: relative;
+}
+#store {
+
 }
   </style>
   
   
 <script>
+
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+ 
+  var lS = localStorage.getItem("result"); 
+
+if (lS !== null) { 
+  document.getElementById("result").innerHTML = localStorage.result;
+
+document.getElementById('name').value = localStorage.name;
+document.getElementById('email').value = localStorage.email;
+document.getElementById('phone').value = localStorage.phone;
+document.getElementById('handle').value = localStorage.handle;
+
+document.getElementById("resultlabel").style.display = "block";
+document.getElementById("result").style.display = "block";
+document.getElementById("store").style.display = "inline";
+} else {
+
+}
+
+
+
+
+
+
+
+});
+
+
+
   function fill() {
  
     
@@ -80,6 +151,55 @@ var handle = document.getElementById('handle').value;
     document.getElementById("resultlabel").style.display = "block";
 
     document.getElementById("resultlabel").scrollIntoView();
+
+    localStorage.setItem("result", result);
+    localStorage.setItem("name", name);
+    localStorage.setItem("email", email);
+    localStorage.setItem("phone", phone);
+    localStorage.setItem("handle", handle);
+
+  }
+
+var seewhat = 0;
+
+  function see() {
+  
+if (seewhat == 0) {
+  document.getElementById("gif").style.display = "block";
+  document.getElementById("see").innerHTML = "Hide animation";
+  seewhat = 1; 
+} else {
+  document.getElementById("gif").style.display = "none";
+  document.getElementById("see").innerHTML = "See how";
+  seewhat = 0; 
+}
+
+
+  }
+
+
+
+
+  function wype() {
+
+    alert("c");
+
+    localStorage.clear();
+    document.getElementById("store").style.display = "none";
+
+    document.getElementById("resultlabel").style.display = "none";
+document.getElementById("result").style.display = "none";
+
+
+document.getElementById('name').value = "";
+document.getElementById('email').value = "";
+document.getElementById('phone').value = "";
+document.getElementById('handle').value = "";
+document.getElementById('name').placeholder = "Firstname Lastname";
+document.getElementById('email').placeholder = "flastname@baltsun.com";
+document.getElementById('phone').placeholder = "410-332-6xxx";
+document.getElementById('handle').placeholder = "e.g. baltimoresun";
+
   }
 </script>
     
@@ -99,12 +219,26 @@ var handle = document.getElementById('handle').value;
   <input type="tel" id="phone" name="phone" placeholder="410-332-6xxx">
 
 <br><br>
-  <label for="handle">X handle <span class="small">(leave blank if not using X)</span></label>
+  <label for="handle">X handle (leave blank if not using X)</label>
   <input type="text" id="handle" name="handle" placeholder="e.g. baltimoresun">
 </form>
 <button onclick="fill()">Get code for Wordpress</button>
+<button id="store" onclick="wype()">Erase stored values</button>
  <label for="result" id="resultlabel">Copy result below and paste into Wordpress</label>
-<div id="resultwrap">
+
+ <div id="resultwrap">
   <div id="result" name="result">
   </div>
+
 </div>
+<div id="small">In Wordpress, toggle "Paste as text" off before pasting.<br>
+Toolbar's clipboard icon should NOT have border;<br><strong>like this:</strong> <img src="https://www.dropbox.com/scl/fi/51ku6nvwz5l96x6gq0a4l/Screen-Shot-2024-09-30-at-4.22.38-PM.png?rlkey=z44hig0bk8qm8hcskt7asgnnn&st=0temexr7&raw=1" alt="T clipboard icon with no border around it" > <strong>not like this:</strong> <img src="https://www.dropbox.com/scl/fi/ec4aaw69nvgy82vl336k7/Screen-Shot-2024-09-30-at-4.22.47-PM.png?rlkey=ze5ffauu9rsqt0xjwmhuxm35j&st=7uwo9h36&raw=1" alt="T clipboard icon with border around it">
+<strong id="see" onclick="see()">See how</strong>
+</div>
+<div id="gif">
+<img src="https://www.dropbox.com/scl/fi/684mpk02ap9esi7t8eaql/172772712787480691.gif?rlkey=emw93a3usfuvw0j8j2x4y6q2l&st=t2xhzqnh&raw=1" alt="animated gif showing copying of text from this generator and pasting into wordpress">
+</div>
+
+
+</body>
+</html>
