@@ -139,9 +139,9 @@ var handle = document.getElementById('handle').value;
     var result ="";
     
     if (isEmptyOrSpaces(handle)) {
-    result = "<em>Have a news tip? Contact " + name + " at <a href='mailto:" + email +"'>" + email + "</a> and <a href='" + phone + "'>" + phone + "</a>.</em>"        
+    result = "<em>Have a news tip? Contact " + name + " at <a href='mailto:" + email +"'>" + email + "</a> and" + phone + "</a>.</em>"        
 } else {
-  result = "<em>Have a news tip? Contact " + name + " at <a href='mailto:" + email + "'>" + email + "</a>, <a href='" + phone + "'>" + phone + "</a> and <a href='https://x.com/" + handle + "' target='_blank'>x.com/" + handle + "</a>.</em>"
+  result = "<em>Have a news tip? Contact " + name + " at <a href='mailto:" + email + "'>" + email + "</a>," + phone + "</a> and <a href='https://x.com/" + handle + "' target='_blank'>x.com/" + handle + "</a>.</em>"
 }
     
     document.getElementById('result').innerHTML = result;
