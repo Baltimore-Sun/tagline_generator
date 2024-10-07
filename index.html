@@ -28,7 +28,7 @@ label {
   font-size: .875em;
   font-weight: bold;
 }
-input {
+input, select {
   margin-top: 5px;
   height: 30px;
   width: 100%;
@@ -51,7 +51,7 @@ display: none;
 #resultlabel {
   margin-bottom: 5px; display: none;
 }
-#small {
+#small, .small {
   font-size: .8em;
   font-style: italic;
   color: #888;
@@ -59,6 +59,12 @@ display: none;
   max-width: 450px;
   line-height: 150%;
   margin-top: 7px;
+}
+.small {
+color: rgb(28, 37, 81);
+cursor: pointer;
+font-weight: bold;
+text-decoration: underline;
 }
 #small img {
 width: 30px;
@@ -88,23 +94,44 @@ button {
 #store {
 
 }
+.top {
+  border-top: 4px solid #ccc;
+  width: 100%;
+  max-width: 450px;
+  padding-top: 8px;;
+  margin-top: 18px;
+}
+#rembtn {
+    display: none;
+}
   </style>
   
   
 <script>
 
 
+
+
+
 document.addEventListener("DOMContentLoaded", function(event) { 
+
+
+ 
+
+
+
+
+
  
   var lS = localStorage.getItem("result"); 
 
 if (lS !== null) { 
   document.getElementById("result").innerHTML = localStorage.result;
 
-document.getElementById('name').value = localStorage.name;
-document.getElementById('email').value = localStorage.email;
-document.getElementById('phone').value = localStorage.phone;
-document.getElementById('handle').value = localStorage.handle;
+document.getElementById('name1').value = localStorage.name1;
+document.getElementById('email1').value = localStorage.email1;
+document.getElementById('phone1').value = localStorage.phone1;
+document.getElementById('handle1').value = localStorage.handle1;
 
 document.getElementById("resultlabel").style.display = "block";
 document.getElementById("result").style.display = "block";
@@ -114,35 +141,119 @@ document.getElementById("store").style.display = "inline";
 }
 
 
-
-
-
-
-
 });
 
 
+function fill() {
+if (bycount < 3) {
+  compile();
+}
+if (bycount == 3) {
 
-  function fill() {
+
+  builder = "";
+ 
+
+  mult("1","one");
+  mult("2","two");
+
+
+
+  result = "<em>Have a news tip? " + builder + "</em>";
+
+
+
+  reveal();
+
+
+}
+if (bycount == 4) {
+
+  builder = "";
+
+  mult("1","one");
+  mult("2","two");
+  mult("3","three");
+
+  result = "<em>Have a news tip? " + builder + "</em>";
+
+  reveal();
+
+}
+if (bycount == 5) {
+
+  builder = "";
+
+  mult("1","one");
+  mult("2","two");
+  mult("3","three");
+  mult("4","four");
+
+  result = "<em>Have a news tip? " + builder + "</em>";
+
+  reveal();
+
+}
+if (bycount == 6) {
+
+  builder = "";
+
+  
+  mult("1","one");
+  mult("2","two");
+  mult("3","three");
+  mult("4","four");
+  mult("5","five");
+
+
+  result = "<em>Have a news tip? " + builder + "</em>";
+
+  reveal();
+
+}
+
+
+
+}
+
+
+var result ="";
+
+  function compile() {
  
     
-    var name = document.getElementById('name').value;
-var email = document.getElementById('email').value;
-var phone = document.getElementById('phone').value;
-var handle = document.getElementById('handle').value;
+var nameone = document.getElementById('name1').value;
+var emailone = document.getElementById('email1').value;
+var phoneone = document.getElementById('phone1').value;
+var handleone = document.getElementById('handle1').value;
     
     function isEmptyOrSpaces(str){
     return str === null || str.match(/^ *$/) !== null;
 }
+
+
     
+   
     
-    var result ="";
-    
-    if (isEmptyOrSpaces(handle)) {
-    result = "<em>Have a news tip? Contact " + name + " at <a href='mailto:" + email +"'>" + email + "</a> and <a href='tel:" + phone.replace(/-/g, '') + "'>" + phone + "</a>.</em>"        
+    if (isEmptyOrSpaces(handleone)) {
+    result = "<em>Have a news tip? Contact " + nameone + " at <a href='mailto:" + emailone +"'>" + emailone + "</a> and <a href='tel:" + phoneone.replace(/-/g, '') + "'>" + phoneone + "</a>.</em>"        
 } else {
-  result = "<em>Have a news tip? Contact " + name + " at <a href='mailto:" + email + "'>" + email + "</a>, <a href='tel:" + phone.replace(/-/g, '') + "'>" + phone + "</a> and <a href='https://x.com/" + handle + "' target='_blank'>x.com/" + handle + "</a>.</em>"
+  result = "<em>Have a news tip? Contact " + nameone + " at <a href='mailto:" + emailone + "'>" + emailone + "</a>, <a href='tel:" + phoneone.replace(/-/g, '') + "'>" + phoneone + "</a> and <a href='https://x.com/" + handleone + "' target='_blank'>x.com/" + handleone + "</a>.</em>"
 }
+    
+reveal();
+
+    localStorage.setItem("result", result);
+    localStorage.setItem("name1", name1.value);
+    localStorage.setItem("email1", email1.value);
+    localStorage.setItem("phone1", phone1.value);
+    localStorage.setItem("handle1", handle1.value);
+
+  }
+
+
+
+  function reveal() {
     
     document.getElementById('result').innerHTML = result;
     
@@ -151,14 +262,64 @@ var handle = document.getElementById('handle').value;
     document.getElementById("resultlabel").style.display = "block";
 
     document.getElementById("resultlabel").scrollIntoView();
-
-    localStorage.setItem("result", result);
-    localStorage.setItem("name", name);
-    localStorage.setItem("email", email);
-    localStorage.setItem("phone", phone);
-    localStorage.setItem("handle", handle);
-
   }
+
+  var builder = "";
+
+  function mult(n,s) {
+ 
+
+  
+ 
+
+window['name' + s] = document.getElementById('name' + n).value;
+window['email' + s] = document.getElementById('email' + n).value;
+window['phone' + s] = document.getElementById('phone' + n).value;
+window['handle' + s] = document.getElementById('handle' + n).value;
+
+function isEmptyOrSpaces(str){
+    return str === null || str.match(/^ *$/) !== null;
+}
+
+
+var chunk = "";
+  
+var check = window['handle' + s];
+
+if (isEmptyOrSpaces(check)) {
+
+      chunk = "Contact " + window['name' + s] + " at <a href='mailto:" + window['email' + s] +"'>" + window['email' + s] + "</a> and <a href='tel:" + window['phone' + s].replace(/-/g, '') + "'>" + window['phone' + s] + "</a>."        
+} 
+
+
+else {
+chunk = "Contact " + window['name' + s] + " at <a href='mailto:" + window['email' + s] + "'>" + window['email' + s] + "</a>, <a href='tel:" + window['phone' + s].replace(/-/g, '') + "'>" + window['phone' + s] + "</a> and <a href='https://x.com/" + window['handle' + s] + "' target='_blank'>x.com/" + window['handle' + s] + "</a>."
+
+}
+
+builder = builder += " " + chunk;
+
+//localStorage.setItem("name" + n, name1.value);
+    //localStorage.setItem("email" + n, email + n.value);
+    //localStorage.setItem("phone" + n, phone + n.value);
+    //localStorage.setItem("handle" + n, handle + n.value);
+
+
+   
+   
+}
+
+
+
+
+    
+    
+  
+
+
+
+
+  
 
 var seewhat = 0;
 
@@ -178,6 +339,46 @@ if (seewhat == 0) {
   }
 
 
+var bycount = 2;
+
+  function append(n) {
+
+    document.getElementById("rembtn").style.display = "inline";
+
+   if (bycount < 6)  {
+    bycount = bycount + 1;
+
+
+var addform ="<div id='wrap" + n + "'> <label for='name" + n + "' class='top'>Reporter " + n + " name</label><input type='text' id='name" + n + "' name='name' placeholder='Firstname Lastname'><br><br><label for='email " + n + "'>Email addresss</label><input type='email' id='email" + n + "' name='email" + n + "' placeholder='flastname@baltsun.com'><br><br><label for='phone " + n + "'>Phone number</label><input type='tel' id='phone" + n + "' name='phone" + n + "' placeholder='410-332-6xxx'><br><br><label for='handle " + n + "'>X handle (leave blank if not using X)</label><input type='text' id='handle" + n + "' name='handle" + n + "' placeholder='e.g. baltimoresun'></div> "
+
+
+
+document.getElementById('form').insertAdjacentHTML('beforeend', addform);
+   } else {
+    alert("This tool supports a maximum of 5 bylines");
+   }
+
+  
+
+ 
+  }
+
+
+
+  function remove(n) {
+
+    var element = "wrap" + n;
+
+    document.getElementById(element).remove();
+
+    bycount = bycount - 1;
+
+    
+    
+    if (bycount == 2) {
+        document.getElementById("rembtn").style.display = "none";
+    }
+  }
 
 
   function wype() {
@@ -191,14 +392,14 @@ if (seewhat == 0) {
 document.getElementById("result").style.display = "none";
 
 
-document.getElementById('name').value = "";
-document.getElementById('email').value = "";
-document.getElementById('phone').value = "";
-document.getElementById('handle').value = "";
-document.getElementById('name').placeholder = "Firstname Lastname";
-document.getElementById('email').placeholder = "flastname@baltsun.com";
-document.getElementById('phone').placeholder = "410-332-6xxx";
-document.getElementById('handle').placeholder = "e.g. baltimoresun";
+document.getElementById('name1').value = "";
+document.getElementById('email1').value = "";
+document.getElementById('phone1').value = "";
+document.getElementById('handle1').value = "";
+document.getElementById('name1').placeholder = "Firstname Lastname";
+document.getElementById('email1').placeholder = "flastname@baltsun.com";
+document.getElementById('phone1').placeholder = "410-332-6xxx";
+document.getElementById('handle1').placeholder = "e.g. baltimoresun";
 
   }
 </script>
@@ -207,21 +408,29 @@ document.getElementById('handle').placeholder = "e.g. baltimoresun";
 
   
   <body>
-<form>
-
-   <label for="name">Reporter name</label>
-  <input type="text" id="name" name="name" placeholder="Firstname Lastname">
+<form id="form">
+  
+  <div id="wrap1">
+   <label for="name1" class="top">Reporter 1 name</label>
+  <input type="text" id="name1" name="name1" placeholder="Firstname Lastname">
   <br><br>
-  <label for="email">Email addresss</label>
-  <input type="email" id="email" name="email" placeholder="flastname@baltsun.com">
+  <label for="email1">Email addresss</label>
+  <input type="email" id="email1" name="email1" placeholder="flastname@baltsun.com">
   <br><br>
-    <label for="phone">Phone number </label>
-  <input type="tel" id="phone" name="phone" placeholder="410-332-6xxx">
+    <label for="phone1">Phone number </label>
+  <input type="tel" id="phone1" name="phone1" placeholder="410-332-6xxx">
 
 <br><br>
-  <label for="handle">X handle (leave blank if not using X)</label>
-  <input type="text" id="handle" name="handle" placeholder="e.g. baltimoresun">
+  <label for="handle1">X handle (leave blank if not using X)</label>
+  <input type="text" id="handle1" name="handle1" placeholder="e.g. baltimoresun">
+</div>
 </form>
+
+<div style="width: 100%; max-width: 450px;margin-bottom: 11px;position: relative;top:-5px;">
+<div class="small" onclick="append(bycount)" style="display: inline;">add byline</div>
+<div class="small" id="rembtn" onclick="remove(bycount-1)"><span style="color:#000;text-decoration:none;cursor: none;display: inline-block;margin-right:5px;;">|</span>remove byline</div>
+</div>
+
 <button onclick="fill()">Get code for Wordpress</button>
 <button id="store" onclick="wype()">Erase stored values</button>
  <label for="result" id="resultlabel">Copy result below and paste into Wordpress</label>
